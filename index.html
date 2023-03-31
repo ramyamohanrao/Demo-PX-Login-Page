@@ -1,0 +1,150 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PX demo</title>
+    <style>
+        *{ box-sizing: border-box; }
+        html, body{ margin: 0; padding: 0; }
+        .container{
+            margin: 10px 50px;
+        }
+        .form-group{
+            margin: 10px;
+        }
+        input{
+            width: 100%;
+            border: solid 1px #eee;
+            padding: 15px 10px;
+        }
+        button{
+            width: 200px;
+            padding: 15px;
+            margin-left: 250px;
+            background: #fff;
+            color: rgb(49, 97, 144);
+            border: solid 1px rgb(6, 37, 67);
+            cursor: pointer;
+            transition:  all .38s ease-in-out;
+        }
+        button:hover{
+            background: rgb(74, 131, 189);
+            color: #fff;
+        }
+        table tr td{
+            border: solid 1px #eee;
+            padding: 10px;
+        }
+        #object1 {
+            width: 500px;
+            height: 600px;
+            background-color: rgb(138, 201, 138);
+            object-fit: none;
+            object-position: center top;
+            /* String value */
+        }
+  
+        #object2 {
+            width: 2000px;
+            height: 1000px;
+            background-color: rgb(112, 155, 170);
+            object-fit: none;
+            object-position: 10px 30px;
+            padding: 200px;
+            margin-left: 250px;
+            margin: 30px;
+            /* Numeric value */
+        }
+    </style>
+    <title>Website Name | Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+    <header>
+        <div id="row">
+            <div id="brand"><img src="GainsightPX.png" width="90" height="40"></div>
+            <div id="menu">
+                <ul>
+                    <li><a href="https://www.gainsight.com/" class="active">Home</a></li>
+                    <li><a href="https://www.gainsight.com/product-experience/#">Products</a></li>
+                    <li><a href="https://www.gainsight.com/pricing/">pricing</a></li>
+                    <li><a href="https://www.gainsight.com/pricing/#">Solutions</a></li>
+                    <li><a href="https://www.gainsight.com/customers/">Customers</a></li>
+                    <li><a href="/https://www.gainsight.com/customers/#">Resources</a></li>
+                </ul>
+            </div>
+        </div>
+        <div>
+             <!--<img id="object2" src="PX _Page.png" /> -->
+        </div>
+        </form>
+    </header>
+
+        <!-- <h2>MY INFO</h2>
+        <div id="output">
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email Address</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--DISPLAY USERS DATA 
+                </tbody>
+            </table> --> 
+    <main>        
+
+    <script type="text/javascript">
+        const signUp = e => {
+            let formData = JSON.parse(localStorage.getItem('formData')) || [];
+            let exist = formData.length && 
+            JSON.parse(localStorage.getItem('formData')).some(data => data.fname.toLowerCase() == document.getElementById('fname').value.toLowerCase() && data.lname.toLowerCase() == document.getElementById('lname').value.toLowerCase());
+            if(!exist){
+                formData.push({
+                    fname: document.getElementById('fname').value,
+                    lname: document.getElementById('lname').value,
+                    email: document.getElementById('email').value,
+                    pwd: document.getElementById('pwd').value
+                });
+                localStorage.setItem('formData', JSON.stringify(formData));
+                // console.log(localStorage.getItem('formData'));
+                dispData();
+                document.querySelector('form').reset();
+                document.getElementById('fname').focus();
+            }
+            else{
+                alert("Ooopppssss... Duplicate found!!!\nYou have already sigjned up");
+            }
+            e.preventDefault();
+        }
+        function dispData(){
+            console.log(localStorage.getItem('formData'));
+            if(localStorage.getItem('formData')){
+                var output = document.querySelector('tbody');
+                output.innerHTML = "";
+                JSON.parse(localStorage.getItem('formData')).forEach(data => {
+                    output.innerHTML += `
+                            <tr>
+                                <td>${data.fname}</td>
+                                <td>${data.lname}</td>
+                                <td>${data.email}</td>
+                                <td>${data.pwd}</td>
+                            </tr>
+                    `;
+                });                
+            }
+        }
+        dispData();
+    </script>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
